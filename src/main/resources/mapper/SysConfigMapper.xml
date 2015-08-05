@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.disappearwind.app.mapper.SysConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.disappearwind.app.model.SysConfig" >
+    <id column="SysConfigID" property="sysconfigid" jdbcType="INTEGER" />
+    <result column="ConfigType" property="configtype" jdbcType="INTEGER" />
+    <result column="ConfigKey" property="configkey" jdbcType="VARCHAR" />
+    <result column="ConfigValue" property="configvalue" jdbcType="VARCHAR" />
+    <result column="Description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="selectAllSysConfigs" resultMap="BaseResultMap">
+  	select * from sysconfig
+  </select>
+</mapper>

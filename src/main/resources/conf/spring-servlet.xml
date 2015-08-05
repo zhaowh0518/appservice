@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+        
+    <context:component-scan base-package="com.disappearwind.app.controller" />
+	<mvc:default-servlet-handler />
+	<context:annotation-config />
+
+	<mvc:annotation-driven>
+ 		<mvc:message-converters register-defaults="true">
+ 			<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+ 				<property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                       <!--  <value>text/html;charset=UTF-8</value> -->
+                    </list>
+                </property>
+ 				<property name="features">  
+			        <array value-type="com.alibaba.fastjson.serializer.SerializerFeature">  
+			           <value>DisableCircularReferenceDetect</value>  
+			        </array>  
+			     </property>
+ 			</bean>
+ 			<bean class = "org.springframework.http.converter.StringHttpMessageConverter">     
+                <property name = "supportedMediaTypes">  
+                      <list>  
+                          <!-- <value>text/html;charset=UTF-8</value> -->     
+                           <value>application/json;charset=UTF-8</value>
+                     </list>     
+                </property>   
+             </bean> 
+ 		</mvc:message-converters>
+ 	</mvc:annotation-driven>
+ 	
+ 	<!--<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	  <property name="viewClass">
+	   	<value>org.springframework.web.servlet.view.InternalResourceView</value>
+	  </property>
+	  <property name="prefix" value="/WEB-INF/views/" />
+	  <property name="suffix" value=".jsp" />
+	</bean> -->
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+	    <property name="maxUploadSize" value="10485760" />  
+	</bean>
+	
+	<!-- 全局拦截器，用于处理接口未上线前给客户端提供的假数据 -->
+	<!-- <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/**" /> <bean 
+		class="com.disappearwind.app.interceptor.ExampleInterceptor"></bean> </mvc:interceptor> 
+		</mvc:interceptors> -->		
+
+</beans>

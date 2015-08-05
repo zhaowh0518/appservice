@@ -1,0 +1,12 @@
+﻿{
+    "status": 1,
+    "msg": "如有异常会做提示",
+    "result": {
+        "uniqueid": 123,
+        "uid": 1,
+        "sid": "3e3r",
+        "appversion": "1.0.2",
+        "appversiontype": 0,
+        "dataversion": "1.0"
+    }
+}

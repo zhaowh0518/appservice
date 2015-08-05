@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.disappearwind.app.mapper.AppUserMapper">
+	<resultMap id="BaseResultMap" type="com.disappearwind.app.model.AppUser">
+		<id column="AppUserID" property="appuserid" jdbcType="INTEGER" />
+		<result column="UserInfoID" property="userinfoid" jdbcType="INTEGER" />
+		<result column="AppToken" property="apptoken" jdbcType="VARCHAR" />
+		<result column="AppVersion" property="appversion" jdbcType="VARCHAR" />
+		<result column="DeviceNum" property="devicenum" jdbcType="VARCHAR" />
+		<result column="DeviceModel" property="devicemodel" jdbcType="VARCHAR" />
+		<result column="DeviceResolution" property="deviceresolution"
+			jdbcType="VARCHAR" />
+		<result column="JailBroken" property="jailbroken" jdbcType="BIT" />
+		<result column="OSVersion" property="osversion" jdbcType="VARCHAR" />
+		<result column="CreateDate" property="createdate" jdbcType="DATE" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		AppUserID, UserInfoID, AppToken, AppVersion, DeviceNum,
+		DeviceModel,
+		DeviceResolution,
+		JailBroken, OSVersion, CreateDate
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from appuser
+		where AppUserID = #{appuserid,jdbcType=INTEGER}
+	</select>
+	<select id="selectIDByDeviceNum" resultType="java.lang.Integer"
+		parameterType="java.lang.String">
+		select
+		AppUserID
+		from appuser
+		where DeviceNum =
+		#{devicenum,jdbcType=VARCHAR}
+	</select>
+	<insert id="insert" parameterType="com.disappearwind.app.model.AppUser"
+		useGeneratedKeys="true" keyProperty="appuserid">
+		insert into appuser
+		(AppUserID, AppToken,
+		AppVersion, DeviceNum, DeviceModel,
+		DeviceResolution, JailBroken, OSVersion,
+		CreateDate)
+		values
+		(#{appuserid,jdbcType=INTEGER},
+		#{apptoken,jdbcType=VARCHAR},
+		#{appversion,jdbcType=VARCHAR},
+		#{devicenum,jdbcType=VARCHAR}, #{devicemodel,jdbcType=VARCHAR},
+		#{deviceresolution,jdbcType=VARCHAR}, #{jailbroken,jdbcType=BIT},
+		#{osversion,jdbcType=VARCHAR},NOW())
+	</insert>
+</mapper>
